@@ -20,7 +20,7 @@ jobs:
           chmod +x ./build.sh
 
       - name: Run get_tools.sh
-        run: ./get_tools.sh
+        run: ./get_toolchain.sh
 
       - name: Run build.sh
         run: ./build.sh
