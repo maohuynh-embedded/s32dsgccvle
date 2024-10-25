@@ -12,9 +12,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      id: docker_build
+      run: |
+        IMAGE_TAG=$(git rev-parse --short HEAD)
+        docker build . --file Dockerfile --tag my-image-name:$IMAGE_TAG
 
     - name: Execute build script inside Docker container
       run: |
-        docker run --rm my-image-name:$(date +%s) ./build.sh
+        IMAGE_TAG=$(git rev-parse --short HEAD)
+        docker run --rm my-image-name:$IMAGE_TAG ./build.sh
