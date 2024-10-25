@@ -16,7 +16,7 @@ jobs:
 
       - name: Set up permissions for scripts
         run: |
-          chmod +x ./get_tools.sh
+          chmod +x ./get_toolchain.sh
           chmod +x ./build.sh
 
       - name: Run get_tools.sh
