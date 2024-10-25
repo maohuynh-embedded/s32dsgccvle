@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     expect dejagnu texinfo automake tcl-dev file \
     texlive libgmp-dev libmpfr-dev libmpc-dev \
     && dpkg --add-architecture i386 && apt-get update \
-    && apt-get install -y libncurses-dev:i386 zlib1g-dev:i386 libpython2.7-dev:i386
+    && apt-get install -y libncurses-dev:i386 zlib1g-dev:i386
 
 # Add user
 RUN useradd -c 'User' -G sudo -m -g users user
