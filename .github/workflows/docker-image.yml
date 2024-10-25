@@ -8,7 +8,7 @@ on:
 
 jobs:
   get-tools:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted  # Use self-hosted runner
     steps:
       - uses: actions/checkout@v4
       - name: Create Directory Structure
@@ -21,7 +21,7 @@ jobs:
       #     ../get_toolchain.sh
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted  # Use self-hosted runner
     needs: get-tools  # This job depends on the get-tools job
     steps:
       - uses: actions/checkout@v4
