@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build Script CI
 
 on:
   push:
@@ -11,15 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Build the Docker image
-      id: docker_build
-      run: |
-        IMAGE_TAG=$(git rev-parse --short HEAD)
-        docker build . --file Dockerfile --tag my-image-name:$IMAGE_TAG
+      - name: Set up permissions for scripts
+        run: |
+          chmod +x ./get_tools.sh
+          chmod +x ./build.sh
 
-    - name: Execute build script inside Docker container
-      run: |
-        IMAGE_TAG=$(git rev-parse --short HEAD)
-        docker run --rm my-image-name:$IMAGE_TAG ./build.sh
+      - name: Run get_tools.sh
+        run: ./get_tools.sh
+
+      - name: Run build.sh
+        run: ./build.sh
