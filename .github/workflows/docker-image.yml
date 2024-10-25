@@ -1,4 +1,4 @@
-name: Build Script CI
+name: CI Pipeline
 
 on:
   push:
@@ -7,20 +7,24 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  get-tools:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up permissions for scripts
+      - uses: actions/checkout@v4
+      - name: Create Directory Structure
+        run: |
+          mkdir -p src/s32ds/source_release  # Create the necessary directory
+      - name: Run get_toolchain.sh
         run: |
           chmod +x ./get_toolchain.sh
-          chmod +x ./build.sh
+          ./get_toolchain.sh
 
-      - name: Run get_tools.sh
-        run: ./get_toolchain.sh
-
+  build:
+    runs-on: ubuntu-latest
+    needs: get-tools  # This job depends on the get-tools job
+    steps:
+      - uses: actions/checkout@v4
       - name: Run build.sh
-        run: ./build.sh
+        run: |
+          chmod +x ./build.sh
+          ./build.sh
