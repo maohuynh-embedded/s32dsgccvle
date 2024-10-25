@@ -13,11 +13,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: Create Directory Structure
         run: |
-          mkdir -p src/s32ds/source_release  # Create the necessary directory
+          mkdir -p src/s32ds/source_release  # Create the necessary directory structure
+
       - name: Run get_toolchain.sh
         run: |
-          chmod +x ./get_toolchain.sh
-          ./get_toolchain.sh
+          cd src/s32ds  # Change to the appropriate directory
+          chmod +x ../get_toolchain.sh
+          ../get_toolchain.sh
 
   build:
     runs-on: ubuntu-latest
