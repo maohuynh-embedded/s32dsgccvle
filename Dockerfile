@@ -1,4 +1,5 @@
-FROM debian:stretch as s32dsgccvle-setup
+# Use the official Debian Bullseye image as the base
+FROM docker.io/library/debian:bullseye
 
 # Set environment variables
 ENV TZ=Europe/Berlin
